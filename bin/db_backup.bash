@@ -16,8 +16,6 @@ source impl/${DB_IMPL_TYPE}/tools.bash
 
 assert_installed file
 assert_installed pg_dump
-assert_installed gzip
-assert_installed gunzip
 assert_installed psql
 assert_file_not_exist ${BACKUP_FILEPATH}
 assert_db_exist ${DBNAME}

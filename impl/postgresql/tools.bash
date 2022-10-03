@@ -57,3 +57,38 @@ function db_restore()
     fi
     export PGPASSWORD=
 }
+
+function db_drop()
+{
+    dbname=${1}
+    export PGPASSWORD=${PSQL_DB_POSTGRES_PGPASSWORD}
+    psql -p ${PSQL_DB_PORT} -h ${PSQL_DB_HOST} -U ${PSQL_DB_POSTGRES_USERNAME} -c "DROP DATABASE ${dbname};"
+    if [ $? -ne 0 ]
+    then
+        export PGPASSWORD=
+        echo "ERROR: psql error"
+        exit 1
+    fi
+    export PGPASSWORD=
+}
+
+function db_create()
+{
+    dbname=${1}
+    export PGPASSWORD=${PSQL_DB_POSTGRES_PGPASSWORD}
+    psql -p ${PSQL_DB_PORT} -h ${PSQL_DB_HOST} -U ${PSQL_DB_POSTGRES_USERNAME} -c "CREATE DATABASE ${dbname};"
+    if [ $? -ne 0 ]
+    then
+        export PGPASSWORD=
+        echo "ERROR: psql create dabase error"
+        exit 1
+    fi
+    psql -p ${PSQL_DB_PORT} -h ${PSQL_DB_HOST} -U ${PSQL_DB_POSTGRES_USERNAME} -c "GRANT ALL PRIVILEGES ON DATABASE ${dbname} to ${PSQL_DB_USERNAME};"
+    if [ $? -ne 0 ]
+    then
+        export PGPASSWORD=
+        echo "ERROR: psql grant all privileges on database error"
+        exit 1
+    fi
+    export PGPASSWORD=
+}
