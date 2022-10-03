@@ -15,7 +15,7 @@ source impl/${DB_IMPL_TYPE}/tools.bash
 
 assert_installed file
 assert_installed psql
-assert_db_exist ${DBNAME}
+assert_db_not_exist ${DBNAME}
 
 echo "Now deleting...."
 db_create ${DBNAME}

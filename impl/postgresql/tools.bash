@@ -18,7 +18,7 @@ function assert_db_not_exist()
 {
     dbname=${1}
     export PGPASSWORD=${PSQL_DB_PGPASSWORD}
-    psql -p ${PSQL_DB_PORT} -h ${PSQL_DB_HOST} -U ${PSQL_DB_USERNAME} -d ${dbname} -c '\l' > /dev/null
+    psql -p ${PSQL_DB_PORT} -h ${PSQL_DB_HOST} -U ${PSQL_DB_USERNAME} -d ${dbname} -c '\l' > /dev/null 2> /dev/null
     if [ $? -eq 0 ]
     then
         export PGPASSWORD=
