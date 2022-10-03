@@ -42,3 +42,18 @@ function db_backup()
     fi
     export PGPASSWORD=
 }
+
+function db_restore()
+{
+    dbname=${1}
+    backup_filepath=${2}
+    export PGPASSWORD=${PSQL_DB_PGPASSWORD}
+    psql -p ${PSQL_DB_PORT} -h ${PSQL_DB_HOST} -U ${PSQL_DB_USERNAME} -d ${dbname} -f ${backup_filepath} 2> restore.err > restore.log
+    if [ $? -ne 0 ]
+    then
+        export PGPASSWORD=
+        echo "ERROR: psql error"
+        exit 1
+    fi
+    export PGPASSWORD=
+}
