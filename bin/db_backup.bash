@@ -1,9 +1,14 @@
 #!/bin/bash
 
-if [ $# -ne 2 ]
+if [ $# -ne 2 -a $# -ne 3 ]
 then
-    echo "Usage: $0 <dbname> <backup-filepath>"
+    echo "Usage: $0 <dbname> <backup-filepath> [exec-dir]"
     exit 1
+fi
+if [ $# -eq 3 ]
+then
+    EXEC_DIR=${1}
+    cd ${EXEC_DIR}
 fi
 
 source env/env.bash
