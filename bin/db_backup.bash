@@ -7,7 +7,7 @@ then
 fi
 if [ $# -eq 3 ]
 then
-    EXEC_DIR=${1}
+    EXEC_DIR=${3}
     cd ${EXEC_DIR}
 fi
 

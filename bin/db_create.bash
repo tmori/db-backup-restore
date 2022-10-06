@@ -1,9 +1,14 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]
+if [ $# -ne 1 -a $# -ne 2 ]
 then
-    echo "Usage: $0 <dbname>"
+    echo "Usage: $0 <dbname> [exec-dir]"
     exit 1
+fi
+if [ $# -eq 2 ]
+then
+    EXEC_DIR=${2}
+    cd ${EXEC_DIR}
 fi
 
 source env/env.bash

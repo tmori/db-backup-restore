@@ -7,12 +7,13 @@ then
 fi
 if [ $# -eq 3 ]
 then
-    EXEC_DIR=${1}
+    EXEC_DIR=${3}
     cd ${EXEC_DIR}
 fi
 
 source env/env.bash
 source utils/check-utils.bash
+source impl/${DB_IMPL_TYPE}/tools.bash
 
 DBNAME=${1}
 BACKUP_FILEPATH=${2}
